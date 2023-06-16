@@ -31,7 +31,6 @@ struct ChatCompletionsEndpoint: Endpoint {
             "stream": self.optionalParameters?.stream as Any,
             "max_tokens": self.optionalParameters?.maxTokens as Any,
             "functions": self.optionalParameters?.functions as Any,
-            "function_call": self.optionalParameters?.functionCall as Any
         ]
     }
 
