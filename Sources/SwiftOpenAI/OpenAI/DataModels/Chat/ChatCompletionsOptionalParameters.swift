@@ -8,6 +8,8 @@ public struct ChatCompletionsOptionalParameters {
     public let stream: Bool
     public let maxTokens: Int?
     public let user: String?
+    public let functions: String?
+    public let functionCall: String?
 
     public init(temperature: Double = 1.0,
                 topP: Int = 1,
@@ -17,7 +19,10 @@ public struct ChatCompletionsOptionalParameters {
                 maxTokens: Int? = nil,
                 presencePenalty: Int = 0,
                 frequencyPenalty: Int = 0,
-                user: String? = nil) {
+                user: String? = nil,
+                functions: String? = nil,
+                functionCall: String? = nil
+    ) {
         self.temperature = temperature
         self.topP = topP
         self.n = n
@@ -25,5 +30,7 @@ public struct ChatCompletionsOptionalParameters {
         self.stream = stream
         self.maxTokens = maxTokens
         self.user = user
+        self.functions = functions
+        self.functionCall = functionCall
     }
 }
