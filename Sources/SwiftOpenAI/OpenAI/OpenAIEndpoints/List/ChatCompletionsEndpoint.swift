@@ -32,9 +32,9 @@ struct ChatCompletionsEndpoint: Endpoint {
             "max_tokens": self.optionalParameters?.maxTokens as Any
         ]
         
-        if let opP = self.optionalParameters{
-            response["functions"] = opP.functions as Any
-            response["functionCall"] = opP.functionCall as Any
+        if let opP = self.optionalParameters, let fun = opP.functions, let funCall = opP.functionCall{
+            response["functions"] = fun as Any
+            response["function_call"] = funCall as Any
         }
         
         return response
