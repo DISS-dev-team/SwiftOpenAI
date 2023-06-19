@@ -5,8 +5,8 @@ final class ChatCompletionRequestSpec: XCTestCase {
     private let api = API()
 
     func testRequest_CreatedWithCorrectHeaders() throws {
-        let apiKey = "1234567890"
-        let model: OpenAIModelType = .gpt4(.base)
+        let apiKey = "123"
+        let model: OpenAIModelType = .gpt3_5(.gpt_3_5_turbo_0613)
         let messages: [MessageChatGPT] = [.init(text: "Hello, who are you?", role: .user)]
         var endpoint = OpenAIEndpoints.chatCompletions(model: model, messages: messages, optionalParameters: nil).endpoint
         
@@ -19,6 +19,6 @@ final class ChatCompletionRequestSpec: XCTestCase {
         
         XCTAssertEqual(sut.allHTTPHeaderFields?.count, 2)
         XCTAssertEqual(sut.allHTTPHeaderFields?["Content-Type"], "application/json")
-        XCTAssertEqual(sut.allHTTPHeaderFields?["Authorization"], "Bearer 1234567890")
+        XCTAssertEqual(sut.allHTTPHeaderFields?["Authorization"], "Bearer \(apiKey)")
     }
 }

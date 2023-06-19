@@ -3,16 +3,24 @@ import XCTest
 
 final class ChatCompletionAPIClientSpec: XCTestCase {
     private var sut: CreateChatCompletionsRequestProtocol!
-    private let model: OpenAIModelType = .gpt4(.base)
-    private let apiKey = "1234567890"
+    private let model: OpenAIModelType = .gpt3_5(.gpt_3_5_turbo_0613)
+    private let apiKey = "123456"
     private let messages: [MessageChatGPT] = [.init(text: "Hello, who are you?",
                                                     role: .user)]
     
     func testAsyncAPIRequest_ParsesValidJSONToChatCompletionsDataModel() async throws {
         let json = loadJSON(name: "chat.completions")
         
+        let params:ChatCompletionsOptionalParameters = .init(functions: [
+            ["name" : "GraphBuilder"],
+            ["description": "Generate a group bar graph"]
+        ])
+        
         let api = API(requester: RequesterMock())
-        let endpoint = OpenAIEndpoints.chatCompletions(model: model, messages: messages, optionalParameters: nil).endpoint
+        let endpoint = OpenAIEndpoints.chatCompletions(
+            model: model,
+            messages: messages, optionalParameters: params
+        ).endpoint
         
         sut = CreateChatCompletionsRequest()
         
@@ -21,7 +29,7 @@ final class ChatCompletionAPIClientSpec: XCTestCase {
                  statusCode: 200)
         
         do {
-            let dataModel = try await sut.execute(api: api, apiKey: apiKey, model: model, messages: messages, optionalParameters: nil)
+            let dataModel = try await sut.execute(api: api, apiKey: apiKey, model: model, messages: messages, optionalParameters: params)
             XCTAssertNotNil(dataModel)
             XCTAssertEqual(dataModel?.id, "chatcmpl-123")
             XCTAssertEqual(dataModel?.object, "chat.completion")

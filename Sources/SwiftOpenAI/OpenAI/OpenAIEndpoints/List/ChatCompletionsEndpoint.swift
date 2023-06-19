@@ -21,7 +21,7 @@ struct ChatCompletionsEndpoint: Endpoint {
     }
 
     var parameters: [String: Any]? {
-        [
+        var response = [
             "model": self.model.name as Any,
             "messages": self.messages as Any,
             "temperature": self.optionalParameters?.temperature as Any,
@@ -31,6 +31,13 @@ struct ChatCompletionsEndpoint: Endpoint {
             "stream": self.optionalParameters?.stream as Any,
             "max_tokens": self.optionalParameters?.maxTokens as Any
         ]
+        
+        if let opP = self.optionalParameters{
+            response["functions"] = opP.functions as Any
+            response["functionCall"] = opP.functionCall as Any
+        }
+        
+        return response
     }
 
     private static func mapMessageModelToDictionary(messages: [MessageChatGPT]) -> [[String: String]] {
