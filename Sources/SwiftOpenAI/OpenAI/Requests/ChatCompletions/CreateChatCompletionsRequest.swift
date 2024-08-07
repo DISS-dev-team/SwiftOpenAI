@@ -26,7 +26,7 @@ final public class CreateChatCompletionsRequest: CreateChatCompletionsRequestPro
         
         var endpoint = OpenAIEndpoints.chatCompletions(model: model, messages: messages, optionalParameters: optionalParameters).endpoint
         
-        print("DEBUG: endpoint => \(endpoint)")
+        //print("DEBUG: endpoint => \(endpoint)")
         
         api.routeEndpoint(&endpoint, environment: OpenAIEnvironmentV1())
 
@@ -38,7 +38,7 @@ final public class CreateChatCompletionsRequest: CreateChatCompletionsRequestPro
 
         let result = await api.execute(with: urlRequest)
         
-        print("DEBUG: result => \(result)")
+        //print("DEBUG: result => \(result)")
 
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
