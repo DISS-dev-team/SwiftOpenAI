@@ -10,8 +10,7 @@ struct CompletionsEndpoint: Endpoint {
 
     var path: String = "completions"
 
-    init(model: OpenAIModelType,
-         optionalParameters: CompletionsOptionalParameters?) {
+    init(model: OpenAIModelType, optionalParameters: CompletionsOptionalParameters?) {
         self.model = model
         self.optionalParameters = optionalParameters
     }

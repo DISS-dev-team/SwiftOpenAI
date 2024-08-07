@@ -1,6 +1,7 @@
 import Foundation
 
 public enum OpenAIModelType {
+    case gpt4o_mini(GPT4o_MINI)
     case gpt4o(GPT4o)
     case gpt4(GPT4)
     case gpt3_5(GPT3_5)
@@ -8,14 +9,20 @@ public enum OpenAIModelType {
 
     var name: String {
         switch self {
-        case .gpt4o(let gpt4oModel):
-            return gpt4oModel.rawValue
-        case .gpt4(let gpt4Model):
-            return gpt4Model.rawValue
-        case .gpt3_5(let gpt3_5Model):
-            return gpt3_5Model.rawValue
-        case .embedding(let embeddingModel):
-            return embeddingModel.rawValue
+        case .gpt4o_mini(let gpt4oMiniModel):
+                return gpt4oMiniModel.rawValue
+            
+            case .gpt4o(let gpt4oModel):
+                return gpt4oModel.rawValue
+            
+            case .gpt4(let gpt4Model):
+                return gpt4Model.rawValue
+            
+            case .gpt3_5(let gpt3_5Model):
+                return gpt3_5Model.rawValue
+            
+            case .embedding(let embeddingModel):
+                return embeddingModel.rawValue
         }
     }
 }
@@ -31,9 +38,15 @@ public enum OpenAIImageModelType {
     }
 }
 
+public enum GPT4o_MINI: String{
+    case base = "gpt-4o-mini"
+    case gpt_4o_mini_2024_07_18 = "gpt-4o-mini-2024-07-18"
+}
+
 public enum GPT4o: String {
     case base = "gpt-4o"
     case gpt_4o_2024_05_13 = "gpt-4o-2024-05-13"
+    case gpt_4o_2024_08_06 = "gpt-4o-2024-08-06"
 }
 
 public enum GPT4: String {
