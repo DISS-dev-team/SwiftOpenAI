@@ -22,15 +22,23 @@ final public class CreateChatCompletionsRequest: CreateChatCompletionsRequestPro
                         model: OpenAIModelType,
                         messages: [MessageChatGPT],
                         optionalParameters: ChatCompletionsOptionalParameters?) async throws -> ChatCompletionsDataModel? {
+        
+        
         var endpoint = OpenAIEndpoints.chatCompletions(model: model, messages: messages, optionalParameters: optionalParameters).endpoint
+        
+        print("DEBUG: endpoint => \(endpoint)")
+        
         api.routeEndpoint(&endpoint, environment: OpenAIEnvironmentV1())
 
         var urlRequest = api.buildURLRequest(endpoint: endpoint)
+        
         api.addHeaders(urlRequest: &urlRequest,
                        headers: ["Content-Type": "application/json",
                                  "Authorization": "Bearer \(apiKey)"])
 
         let result = await api.execute(with: urlRequest)
+        
+        print("DEBUG: result => \(result)")
 
         let jsonDecoder = JSONDecoder()
         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
