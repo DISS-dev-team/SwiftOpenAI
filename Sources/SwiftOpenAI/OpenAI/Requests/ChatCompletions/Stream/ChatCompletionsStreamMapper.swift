@@ -32,20 +32,12 @@ public struct ChatCompletionsStreamMapper: ChatCompletionsStreamMappeable {
                 
                 let json = JSON(jsonData)
                 
-                print("DEBUG: From package => \(json)")
-                
-                print("DEBUG: From PKG building model")
-                
-                print("DEBUG: From PKG\n id=> \(json["id"].stringValue)\nchoices=>\(json["choices"].arrayValue)")
-                
                 let chat = ChatCompletionsStreamDataModel(
                     id: json["id"].stringValue,
                     object: json["object"].stringValue,
                     created: json["created"].intValue,
                     model: json["model"].stringValue,
                     choices: json["choices"].arrayValue.map{
-                        
-                        print("DEBUG: From package Choice => \($0)")
                         
                         return .init(
                             delta: $0["delta"]["content"].string == nil ? nil : .init(content: $0["delta"]["content"].string),
