@@ -23,11 +23,10 @@ public struct ChatCompletionsStreamMapper: ChatCompletionsStreamMappeable {
             
             print("DEBUG: From package => \(json)")
             
-            /*if $0 == Constant.streamFinished.rawValue {
+            if $0 == Constant.streamFinished.rawValue {
                 return .finished
             }
             else{
-                let json = JSON($0)
                 
                 return ChatCompletionsStreamDataModel(
                     id: json["id"].stringValue,
@@ -35,16 +34,19 @@ public struct ChatCompletionsStreamMapper: ChatCompletionsStreamMappeable {
                     created: json["created"].intValue,
                     model: json["model"].stringValue,
                     choices: json["choices"].arrayValue.map{
-                        .init(
+                        
+                        print("DEBUG: From package Choice => \($0)")
+                        
+                        return .init(
                             delta: $0["delta"]["content"].string == nil ? nil : .init(content: $0["delta"]["content"].string),
                             index: $0["index"].intValue,
                             finishReason: $0["finish_reason"].string
                         )
                     }
                 )
-            }*/
+            }
             
-            guard let jsonData = $0.data(using: .utf8) else {
+            /*guard let jsonData = $0.data(using: .utf8) else {
                 return nil
             }
             if $0 == Constant.streamFinished.rawValue {
@@ -52,7 +54,7 @@ public struct ChatCompletionsStreamMapper: ChatCompletionsStreamMappeable {
             } else {
                 
                 return try decodeChatCompletionsStreamDataModel(from: jsonData)
-            }
+            }*/
         }.compactMap { $0 }
     }
 
