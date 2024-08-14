@@ -28,6 +28,8 @@ public struct ChatCompletionsStreamMapper: ChatCompletionsStreamMappeable {
             }
             else{
                 
+                print("DEBUG: From PKG building model")
+                
                 return ChatCompletionsStreamDataModel(
                     id: json["id"].stringValue,
                     object: json["object"].stringValue,
