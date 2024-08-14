@@ -6,10 +6,12 @@ public final class API {
     private let router: RouterProtocol
     private let requestBuilder: RequestBuilderProtocol
 
-    public init(requester: RequesterProtocol = Requester(),
-                parser: ParserProtocol = Parser(),
-                router: RouterProtocol = Router(),
-                requestBuilder: RequestBuilderProtocol = RequestBuilder()) {
+    public init(
+        requester: RequesterProtocol = Requester(),
+        parser: ParserProtocol = Parser(),
+        router: RouterProtocol = Router(),
+        requestBuilder: RequestBuilderProtocol = RequestBuilder()
+    ) {
         self.requester = requester
         self.parser = parser
         self.router = router
@@ -32,7 +34,12 @@ public final class API {
         await requester.execute(with: urlRequest)
     }
 
-    public func parse<T: Decodable, E: Decodable & Error>(_ data: Result<Data, APIError>, type: T.Type, jsonDecoder: JSONDecoder, errorType: E.Type) throws -> T? {
+    public func parse<T: Decodable, E: Decodable & Error>(
+        _ data: Result<Data, APIError>,
+        type: T.Type,
+        jsonDecoder: JSONDecoder,
+        errorType: E.Type
+    ) throws -> T? {
         try parser.parse(data, type: T.self, jsonDecoder: jsonDecoder, errorType: E.self)
     }
 }

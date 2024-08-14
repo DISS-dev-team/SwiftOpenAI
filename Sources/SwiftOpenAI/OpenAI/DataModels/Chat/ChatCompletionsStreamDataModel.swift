@@ -33,4 +33,8 @@ public struct DeltaDataModel: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         content = try container.decodeIfPresent(String.self, forKey: .content)
     }
+    
+    public init(content: String? = nil){
+        self.content = content
+    }
 }

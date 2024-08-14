@@ -13,11 +13,14 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.2.0"),
+        .package(url: "https://github.com/SwiftyJSON/SwiftyJSON", from: "5.0.2")
     ],
     targets: [
         .target(
             name: "SwiftOpenAI",
-            dependencies: [],
+            dependencies: [
+                "SwiftyJSON"
+            ],
             plugins: []),
         .testTarget(
             name: "SwiftOpenAITests",

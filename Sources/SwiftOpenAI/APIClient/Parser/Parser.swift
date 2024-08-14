@@ -24,9 +24,10 @@ final public class Parser: ParserProtocol {
         }
     }
 
-    public func parse<T: Decodable>(_ data: Data,
-                                    type: T.Type,
-                                    jsonDecoder: JSONDecoder = .init()
+    public func parse<T: Decodable>(
+        _ data: Data,
+        type: T.Type,
+        jsonDecoder: JSONDecoder = .init()
     ) throws -> T? {
         do {
             return try jsonDecoder.decode(T.self, from: data)
