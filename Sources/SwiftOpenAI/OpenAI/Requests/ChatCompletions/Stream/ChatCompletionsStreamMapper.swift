@@ -19,14 +19,20 @@ public struct ChatCompletionsStreamMapper: ChatCompletionsStreamMappeable {
             return []
         }
         return try extractDataLine(from: dataString).map {
-            let json = JSON($0)
             
-            print("DEBUG: From package => \(json)")
             
             if $0 == Constant.streamFinished.rawValue {
                 return .finished
             }
             else{
+                
+                guard let jsonData = $0.data(using: .utf8) else {
+                    return nil
+                }
+                
+                let json = JSON(jsonData)
+                
+                print("DEBUG: From package => \(json)")
                 
                 print("DEBUG: From PKG building model")
                 
