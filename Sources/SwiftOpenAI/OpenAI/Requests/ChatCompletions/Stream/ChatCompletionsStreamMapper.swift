@@ -30,7 +30,9 @@ public struct ChatCompletionsStreamMapper: ChatCompletionsStreamMappeable {
                 
                 print("DEBUG: From PKG building model")
                 
-                return ChatCompletionsStreamDataModel(
+                print("DEBUG: From PKG\n id=> \(json["id"].stringValue)\nchoices=>\(json["choices"].arrayValue)")
+                
+                let chat = ChatCompletionsStreamDataModel(
                     id: json["id"].stringValue,
                     object: json["object"].stringValue,
                     created: json["created"].intValue,
@@ -46,6 +48,8 @@ public struct ChatCompletionsStreamMapper: ChatCompletionsStreamMappeable {
                         )
                     }
                 )
+                
+                return chat
             }
             
             /*guard let jsonData = $0.data(using: .utf8) else {
